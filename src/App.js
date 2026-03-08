@@ -60,6 +60,7 @@ const galleryImages = [
   '/image.png',
   '/50.png',
 ];
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
 
 function App() {
   const [formData, setFormData] = useState({
@@ -82,20 +83,13 @@ function App() {
     setStatus('');
 
     try {
-      const requestOptions = {
+      const response = await fetch(`${API_BASE_URL}/api/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
-      };
+      });
 
-      let response;
-      try {
-        response = await fetch('/api/register', requestOptions);
-      } catch (_proxyError) {
-        response = await fetch('http://localhost:4000/api/register', requestOptions);
-      }
-
-      const data = await response.json();
+      const data = await response.json().catch(() => ({}));
 
       if (!response.ok || !data.ok) {
         const tgError = data?.details?.description;
@@ -105,7 +99,7 @@ function App() {
         setFormData({ name: '', phone: '', course: 'English Kids', note: '' });
       }
     } catch (_error) {
-      setStatus("Server bilan ulanishda xatolik. 'npm run dev' bilan ishga tushiring.");
+      setStatus('Server bilan ulanishda xatolik. Sayt serveri ishlayotganini tekshiring.');
     } finally {
       setLoading(false);
     }

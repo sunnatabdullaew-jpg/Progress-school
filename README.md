@@ -68,4 +68,30 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Deploy (Fly.io, always on)
+
+1. Install Fly CLI:
+   ```bash
+   curl -L https://fly.io/install.sh | sh
+   ```
+2. Login:
+   ```bash
+   fly auth login
+   ```
+3. In `fly.toml`, change app name (`app = "progress-school-sunnat"`) to unique name.
+4. Set secrets:
+   ```bash
+   fly secrets set TELEGRAM_BOT_TOKEN=YOUR_TOKEN TELEGRAM_CHAT_ID=YOUR_CHAT_ID
+   ```
+5. Deploy:
+   ```bash
+   fly deploy
+   ```
+6. Open:
+   ```bash
+   fly open
+   ```
+
+After deploy, form works from any device without `npm run dev`.
 # Progress-school

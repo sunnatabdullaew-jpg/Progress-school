@@ -21,8 +21,8 @@
     "server": "node server.js",
     "dev": "concurrently -n API,WEB -c cyan,green \"npm run server\" \"react-scripts start\"",
     "serve": "npm run build && npm run server",
-    "daemon:start": "sh -c 'fuser -k 4000/tcp >/dev/null 2>&1 || true; nohup node server.js > server.log 2>&1 & echo $! > server.pid; echo Server started on PID $(cat server.pid)'",
-    "daemon:stop": "sh -c 'fuser -k 4000/tcp >/dev/null 2>&1 || true; rm -f server.pid; echo Server stopped'",
+    "daemon:start": "node -e \"const {spawn}=require('child_process'); const fs=require('fs'); const out=fs.openSync('server.log','a'); const p=spawn('node',['server.js'],{detached:true,stdio:['ignore',out,out]}); p.unref(); console.log('Server started (detached) PID=' + p.pid);\"",
+    "daemon:stop": "sh -c 'fuser -k 4000/tcp >/dev/null 2>&1 || true; echo Server stopped'",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

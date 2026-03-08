@@ -69,6 +69,20 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
+## Deploy (Vercel, recommended)
+
+1. Push this project to GitHub.
+2. In Vercel, import your GitHub repo.
+3. Add Environment Variables in Vercel project settings:
+   - `TELEGRAM_BOT_TOKEN`
+   - `TELEGRAM_CHAT_ID` (example: `-5009390274`)
+4. Deploy.
+
+After deploy:
+- Website is hosted on `*.vercel.app`
+- API works on `https://your-app.vercel.app/api/register`
+- Registration works from any phone/PC without running local server
+
 ## Deploy (Fly.io, always on)
 
 1. Install Fly CLI:
